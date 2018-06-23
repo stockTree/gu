@@ -16,53 +16,13 @@
     </main>
     <footer></footer>
     <script>
-        //1.初始化数据
-        var hashA = init()
-        var keys = hashA['keys']
-        var hash= hashA['hash']
-            
-       //2.生成键盘
-      for(var index=0;index < keys['length'];index = index+1){
-             // 创建一个张三
-       var div1 = tag('div')
-       div1.className = 'row'
-        // 给张三加儿子
-        zhangsan.appendChild(div1)
-
-      var row = keys[index]
-      for(var index2=0;index2 <row['length'];index2=index2+1){
-            var span = createSpan(row[index2])
-            // span.className='text'
-       
-            var buttonx = createButtonx(row[index2])
-
-            var img = createImg
-        
-            var kbd = tag('kbd')
-            kbd.className = 'key'
-
-            kbd.appendChild(span)
-            kbd.appendChild(buttonx)
-            kbd.appendChild(img)
-
-            div1.appendChild(kbd)
-        }
-        }
-
-        //3.监听键盘
-        document.onkeypress = function(xzkjcnlkcjlk){
-          var key = xzkjcnlkcjlk['key']
-          var website = hash[key]
-        //    console.log(website)
-        // 本地打开
-        //    location.href ='http://'+website
-        //    新窗口打开
-        window.open('http://'+website,'_blank')
-        }
 
 
 
-        function getFromLocalStorage(name){
+
+
+
+  function getFromLocalStorage(name){
            return JSON.parse(localStorage.getItem(name) || 'null')
         }
         function tag(tagName){
@@ -98,9 +58,9 @@
             
         }
         return {
-            'keys':'keys',
-            'hash':'hash'
-        }
+            'keys':keys,
+            'hash':hash
+                    }
         }
         function createSpan(textContent){
             var span = tag('span')
@@ -129,7 +89,7 @@
         }
         function createImg(domain){
             var img= tag('img')
-            if(src){
+            if(domain){
                 img.src ='http://'+ domain + '/favicon.ico'
             }else{
                 img.src="http://img.zcool.cn/community/01e8a157f86d8ca84a0d304fcb9943.jpg@2o.jpg"
@@ -139,6 +99,61 @@
             }
             return img
         }
+
+
+
+
+
+
+
+
+        //1.初始化数据
+        var hashA = init()
+        var keys = hashA['keys']
+        var hash = hashA['hash']
+            
+       //2.生成键盘
+      for(var index=0;index < keys['length'];index = index+1){
+             // 创建一个张三
+       var div1 = tag('div')
+       div1.className = 'row'
+        // 给张三加儿子
+        zhangsan.appendChild(div1)
+
+      var row = keys[index]
+      for(var index2=0;index2 <row['length'];index2=index2+1){
+            var span = createSpan(row[index2])
+            // span.className='text'
+       
+            var buttonx = createButtonx(row[index2])
+
+            var img = createImg(hash[row[index2]])
+        
+            var kbd = tag('kbd')
+            kbd.className = 'key'
+
+            kbd.appendChild(span)
+            kbd.appendChild(buttonx)
+            kbd.appendChild(img)
+
+            div1.appendChild(kbd)
+        }
+        }
+
+        //3.监听键盘
+        document.onkeypress = function(xzkjcnlkcjlk){
+          var key = xzkjcnlkcjlk['key']
+          var website = hash[key]
+        //    console.log(website)
+        // 本地打开
+        //    location.href ='http://'+website
+        //    新窗口打开
+        window.open('http://'+website,'_blank')
+        }
+
+
+
+      
     </script>
 </body>
 </html>
