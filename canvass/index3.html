@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html{
+            padding: 0;
+        }
+        body{
+            margin: 0;
+        }
+        #canvas {
+            background-color: green;
+        }
+        #actions{
+            position: fixed;
+            bottom: 0px;
+            left: 0;
+        }
+        .actions >#eraser{
+            display:none;
+        }
+        .actions.x >#eraser{
+           display: inline-block;
+        }
+        .actions.x >#pan{
+            display:none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="canvas">
+
+    </canvas>
+    <div id="actions" class="actions">
+        <button id="pan">画笔</button>
+        <button id="eraser">橡皮擦</button>
+    </div>
+
+    <script>
+        canvas = document.getElementById('canvas')
+        context = canvas.getContext('2d');
+
+
+        function ccc() {
+            pageHeight = document.documentElement.clientHeight
+            pageWidth = document.documentElement.clientWidth
+            canvas.width = pageWidth
+            canvas.height = pageHeight
+        }
+        ccc()
+        window.onresize = function () {
+            ccc();
+        }
+
+
+
+        var using = false
+        var oldDot = {x:undefined,y:undefined}
+        canvas.onmousedown = function(aa){
+            using = true
+            x = aa.clientX
+            y = aa.clientY
+            if(eraserEnable){
+                context.clearRect(x-5,y-5,10,10)
+            }else{
+                var oldDot = {x:x,y:y}
+            }
+            // circle(x,y,3);
+            // console.log(x)
+            // console.log(y)
+            // console.log(circle)
+        }
+
+        canvas.onmousemove = function(aa){
+            if(using){
+                // var newDot = {x:undefined,y:undefined}
+                x = aa.clientX
+                y = aa.clientY
+                if(eraserEnable){
+                context.clearRect(x-5,y-5,10,10)
+            }else{
+                var newDot = {x:x,y:y}
+                drawLine(oldDot.x,oldDot.y,x,y)
+                oldDot = newDot
+            }
+               
+            } 
+        }
+        canvas.onmouseup = function(){
+            using = false
+        }
+
+        function circle(x,y,radius){
+            context.beginPath();
+            context.lineWidth = 4
+            // context.fillStyle = 'red'
+            context.arc(x,y,radius,0,2*Math.PI)
+            context.stroke();
+            // context.closePath();
+        }
+
+        function drawLine(x1,y1,x2,y2){
+            context.beginPath();
+            context.moveTo(x1,y1)
+            context.lineTo(x2,y2)
+            context.stroke();
+            // context.closePath();
+        }
+
+      var eraserEnable = false
+        if(eraserEnable){
+            eraserEnable = !eraserEnable
+        }
+
+     eraser.onclick = function(){
+        eraserEnable = false
+        actions.className = 'actions'
+     }
+     pan.onclick = function(){
+        eraserEnable = true
+        actions.className = 'actions x'
+     }
+    </script>
+</body>
+
+</html>

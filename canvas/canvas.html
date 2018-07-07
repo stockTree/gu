@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
+    <title>canvas</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #xxx {
+            /* background: green; */
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .actions {
+            position: fixed;
+           top: 0;
+            left: 0;
+            padding: 20px;
+        }
+        .actions svg{
+            width: 1.5em;
+            height: 1.5em;
+            transition: all 0.33s;
+            margin: 10px;
+        }
+
+        .actions svg.active{
+           fill:red;
+           transform: scale(1.2);
+        }
+        
+    .icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+    }
+.colors{
+    position:fixed;
+    top: 60px;
+    left: 30px;
+}
+.colors li{
+    width: 20px;
+    height: 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    transition: all 0.33s
+}
+.colors> li.active{
+    box-shadow: 0 0 3px rgba(0, 0, 0, .9);
+    transform: scale(1.2)
+}
+.colors> li.red{
+    background-color: red;
+}
+
+.colors> li.green{
+    background-color: green;
+}
+.colors> li.blue{
+    background-color: blue;
+}
+ul,ol{
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+.sizes{
+    position: fixed;
+    top: 60px;
+    right: 10px;
+}
+.sizes li{
+    margin:20px;
+    transition: all 0.3s
+}
+.sizes li.active{
+    transform: scale(1.2)
+}
+.sizes> .thin{
+    width: 20px;
+    border-top: 2px solid #000;
+}
+.sizes> .middle{
+    width: 20px;
+    border-top: 6px solid #000;
+}
+.sizes> .thick{
+    width: 20px;
+    border-top: 10px solid #000;
+}
+.deletes{
+    position: fixed;
+    top: 20px;
+    right: 30px;
+}
+.saves{
+    position: fixed;
+    top: 20px;
+    right: 10px;
+}
+    </style>
+</head>
+
+<body>
+    <!-- 他的宽高会整体放大或者缩小 -->
+    <canvas id="xxx" width=3 30 height=3 00>
+
+    </canvas>
+    <div class="actions" id="actions">
+        <!-- <button id="eraser">橡皮擦</button>
+        <button id="brush">画笔</button> -->
+        <svg class="icon active" id="brush">
+            <use xlink:href="#icon-pen"></use>
+        </svg>
+        <svg class="icon" id="eraser">
+            <use xlink:href="#icon-eraser"></use>
+        </svg>
+    </div>
+
+    <svg class="icon deletes" id="deletes">
+        <use xlink:href="#icon-delete"></use>
+    </svg>
+    <svg class="icon saves" id="saves">
+        <use xlink:href="#icon-save"></use>
+    </svg>
+
+<ol class="colors">
+    <li id="red" class="red active"></li>
+    <li id="green" class="green"></li>
+    <li id="blue" class="blue"></li>
+</ol>
+<ol class="sizes">
+    <li id="thin" class="thin"></li>
+    <li id="middle" class="middle"></li>
+    <li id="thick" class="thick"></li>
+</ol>
+    <script>
+        // 监听canvas的尺寸
+        // document.body.addEventListener('touchstart',function(eee){
+        //     eee.preventDefault()
+        // })
+        var yyy = document.getElementById('xxx');
+        autoSetCanvas(yyy)
+        var context = yyy.getContext('2d')
+        var lineWidth = 5
+        var strokeStyle = 'red'
+        // 获取上下文
+        // 设置宽高
+
+
+        // context.fillStyle = 'red'
+        // 填充矩形
+        // fill 填充  stroke描边 clear 挖掉或者擦掉
+        // 黄色描边
+        // 四个坐标分别是距离上面距离左边和宽高
+        // 画图的坐标相对于html
+        // context.fillStyle = 'red'
+        // context.fillRect(10,10,100,100);
+        // context.strokeStyle = 'yellow'
+        // context.strokeRect(10,10,100,100);
+        // context.fillRect(10,10,100,100);
+        // 画一个三角形 除了矩形之外别的都需要beginPath
+        // context.beginPath();
+        // context.moveTo(240,240);
+        // context.lineTo(300,240);
+        // context.lineTo(300,300);
+        // context.fill()
+
+        // 度数用3.14那个来表示
+        // drawCircle(150,150,3)
+        listentoMouse(yyy)
+
+
+        function listentoMouse(canvas) {
+
+            var using = false
+            var lastPoint = { "x": undefined, "y": undefined }
+            function drawCircle(x, y, radius) {
+                context.beginPath();
+                context.arc(x, y, radius, 0, 360)
+                context.fill()
+            }
+            //特性检测
+            if (document.body.ontouchstart !== undefined) {
+                //触屏手机
+                canvas.ontouchstart = function (aaa) {
+                    var x = aaa.touches[0].clientX
+                    var y = aaa.touches[0].clientY
+                    using = true
+                    // 用开关
+                    if (eraserEnabled) {
+                        context.clearRect(x - 5, y - 5, 10, 10)
+                    } else {
+                        lastPoint = { "x": x, "y": y }
+                    }
+
+                }
+                canvas.ontouchmove = function (aaa) {
+                    var x = aaa.touches[0].clientX
+                    var y = aaa.touches[0].clientY
+                    console.log(x)
+                    if (!using) { return }
+                    if (eraserEnabled) {
+                        context.clearRect(x - 5, y - 5, 10, 10)
+                    } else {
+                        var newPoint = { "x": x, "y": y }
+                        drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+                        lastPoint = newPoint
+                    }
+                }
+                canvas.ontouchend = function (aaa) {
+                    using = false
+                }
+
+            } else {
+                //非触屏手机
+                canvas.onmousedown = function (aaa) {
+                    var x = aaa.clientX
+                    var y = aaa.clientY
+                    using = true
+                    // 用开关
+                    if (eraserEnabled) {
+                        context.clearRect(x - 5, y - 5, 10, 10)
+                    } else {
+                        lastPoint = { "x": x, "y": y }
+                    }
+
+                }
+                canvas.onmousemove = function (aaa) {
+                    var x = aaa.clientX
+                    var y = aaa.clientY
+                    if (!using) { return }
+                    if (eraserEnabled) {
+                        context.clearRect(x - 5, y - 5, 10, 10)
+                    } else {
+                        var newPoint = { "x": x, "y": y }
+                        drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+                        lastPoint = newPoint
+                    }
+                }
+
+                
+                canvas.onmouseup = function (aaa) {
+                    using = false
+                    console.log('up')
+                }
+            }
+
+
+            //     canvas.onmouseup = function(aaa){
+            //     console.log('up')
+            //     using = false
+            // }
+        }
+
+red.onclick = function(){
+    strokeStyle = 'red'
+    red.classList.add('active')
+    blue.classList.remove('active')
+    green.classList.remove('active')
+}
+green.onclick = function(){
+    strokeStyle = 'green'
+    green.classList.add('active')
+    red.classList.remove('active')
+    blue.classList.remove('active')
+}
+blue.onclick = function(){
+    strokeStyle = 'blue'
+    green.classList.remove('active')
+    red.classList.remove('active')
+    blue.classList.add('active')
+}
+thin.onclick = function(){
+    lineWidth = 2
+}
+middle.onclick = function(){
+    lineWidth = 6
+}
+thick.onclick = function(){
+    lineWidth = 10
+}
+saves.onclick = function(){
+    var url = yyy.toDataURL("image/png")
+    // window.open(url,'_blank')
+    var a = document.createElement('a')
+    document.body.appendChild(a)
+    a.href = url
+    a.download = '我的画儿'
+    a.click()
+}
+deletes.onclick = function(){
+    context.clearRect(0, 0,yyy.width,yyy.height)
+}
+        /*****/
+        var eraserEnabled = false
+        eraser.onclick = function () {
+            eraserEnabled = true
+            eraser.classList.add('active')
+            brush.classList.remove('active')
+            // actions.className = 'actions x'
+        }
+        brush.onclick = function () {
+            eraserEnabled = false
+            brush.classList.add('active')
+            eraser.classList.remove('active')
+            // actions.className = 'actions'
+        }
+
+        // 自动监听canvas的尺寸的函数
+        function autoSetCanvas(canvas) {
+            setCanvasSize()
+            window.onresize = function () {
+                setCanvasSize()
+            }
+            function setCanvasSize() {
+                var pageWidth = document.documentElement.clientWidth
+                var pageHeight = document.documentElement.clientHeight
+                canvas.width = pageWidth
+                console.log(pageWidth)
+                canvas.height = pageHeight
+            }
+        }
+
+function drawLine(x1, y1, x2, y2) {
+                    context.beginPath()
+                    context.moveTo(x1, y1)
+                    context.lineWidth = lineWidth
+                    context.lineTo(x2, y2)
+                    context.strokeStyle = strokeStyle
+                
+                    context.stroke()
+                    context.closePath()
+                }
+
+
+
+
+    </script>
+    <script src="//at.alicdn.com/t/font_737729_jmu9gccd00n.js"></script>
+</body>
+
+</html>

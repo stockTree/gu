@@ -18,10 +18,6 @@
     <script>
 
 
-
-
-
-
   function getFromLocalStorage(name){
            return JSON.parse(localStorage.getItem(name) || 'null')
         }
@@ -71,7 +67,7 @@
         function createButtonx(id){
             var buttonx = tag('button')
             buttonx.textContent="编辑"
-            buttonx.id= id
+            buttonx.id = id
             buttonx.onclick = function(xzkjcnlkcjlk){
                 var button2 = xzkjcnlkcjlk['target']
                 var img2 = button2.previousSibling
@@ -81,7 +77,6 @@
                 img2.src = 'http://'+x + '/favicon.ico'
                 img2.onerror = function(xxx){
                 xxx.target.src="http://img.zcool.cn/community/01e8a157f86d8ca84a0d304fcb9943.jpg@2o.jpg"
-
                 }
                 localStorage.setItem('zzz',JSON.stringify(hash))
             }
@@ -135,7 +130,6 @@
             kbd.appendChild(span)
             kbd.appendChild(buttonx)
             kbd.appendChild(img)
-
             div1.appendChild(kbd)
         }
         }
