@@ -7,12 +7,118 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        body{
+            margin: 0;
+            overflow: hidden
+        }
         #canvas {
             background-color: green
         }
+        ol{
+            list-style: none;
+            margin:0;
+            padding: 0;
+        }
+        .icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+    }
+        .erasers{
+            position: fixed;
+            top: 10px;
+            left: 15px;
+            width: 1.5rem;
+            height: 1.5rem;
+            margin: 10px 20px;
+            transition: all .3;
+        } 
+        .pens{
+            position: fixed;
+            top: 10px;
+            left: 60px;
+            width: 1.5rem;
+            height: 1.5rem;
+            margin: 10px 20px;
+            transition: all .3;
+        }
+        .pens.active{
+            transform:scale(1.2);
+            fill: red;
+        }
+        .erasers.active{
+            transform:scale(1.2);
+            fill: red;
+        }
+        .deletes{
+            position: fixed;
+            top: 10px;
+            left: 100px;
+            width: 1.5rem;
+            height: 1.5rem;
+            margin: 10px 20px;
+        }
+        .saves{
+            position: fixed;
+            top: 10px;
+            left: 140px;
+            width: 1.5rem;
+            height: 1.5rem;
+            margin: 10px 20px;
+        }
+        .colors li{
+            width: 20px;
+            height: 20px;
+            margin: 30px 20px; 
+            border-radius: 10px;
+            transition: all .3s;
+        }
+        .colors{
+            position: fixed;
+            top: 40px;
+            left: 10px;
+        }
+        .red{
+            background-color: red;
+        }
+        .red.active{
+            transform: scale(1.2);
+        }
+        .yellow{
+            background-color: yellow;
+        }
+       .yellow.active{
+        transform: scale(1.2);
+       }
+        .blue{
+            background-color: blue;
+        }
+        .blue.active{
+            transform: scale(1.2);
+        }
+  .line{
+    position: fixed;
+            top: 40px;
+            right: 10px;
+  }
+        .line li{
+            transition: all .3s;
+        }
+        .line li.active{
+            transform: scale(1.2);
+        }
+        .thin{
+            border-top: 3px solid #000;
+            width: 20px;
+            margin: 30px 0;
+        }
+        .thick{
+            border-top: 6px solid #000;
+            width: 20px;
+        }
     </style>
 </head>
-
 <body>
 <!-- 先写出canvas 的大小  直接pageWidth那个来写
 写出onmouse的api
@@ -25,17 +131,33 @@ api{
     canvas的直线 圆 清除
     pageWidth的那个
 } -->
-
-
-
-
-
     <canvas id="canvas">
     </canvas>
-    <button id="eraser">
-        橡皮擦
-    </button>
-
+    <!-- <button id="eraser" class="eraser">
+       
+    </button> -->
+    <svg class="icon erasers" id="erasers">
+        <use xlink:href="#icon-eraser"></use>
+    </svg>
+    <svg class="icon pens active" id="pens">
+        <use xlink:href="#icon-pen"></use>
+    </svg>
+    <svg class="icon deletes" id="deletes">
+        <use xlink:href="#icon-delete"></use>
+    </svg>
+    <svg class="icon saves" id="saves">
+        <use xlink:href="#icon-save"></use>
+    </svg>
+<ol class="colors">
+    <li id="red" class="red active"></li>
+    <li id="blue" class="blue"></li>
+    <li id="yellow" class="yellow"></li>
+</ol>
+<ol class="line">
+    <li class="thin" id="thin"></li>
+    <li class="thick" id="thick"></li>
+</ol>
+    
 
     <script>
         var canvas = document.getElementById('canvas');
@@ -52,18 +174,46 @@ api{
         window.onresize = function () {
             xx();
         }
-       
+        var lineWidth = 4
+        var strokeStyle = 'red'
 
-
-
-
-
-
-        var canvas = document.getElementById('canvas');
+var canvas = document.getElementById('canvas');
         var context = canvas.getContext('2d');
         var using = false
-        //鼠标按下
         var oldDot = { x: undefined, y: undefined }
+console.log(document.body.ontouchstart)
+if(document.body.ontouchstart !== undefined){
+    canvas.ontouchstart = function(aaa){
+        using = true
+            x = aaa.touches[0].clientX
+            console.log(x)
+            y = aaa.touches[0].clientY
+            if(eraserEnable){
+                context.clearRect(x-5,y-5,10,10)
+            }else{
+                oldDot = { x: x, y: y }
+            // circle(x, y, 2);
+            }
+        }
+        canvas.ontouchmove = function(aaa){
+            if (using) {
+                x = aaa.touches[0].clientX
+                y = aaa.touches[0].clientY
+                if(eraserEnable){
+                    context.clearRect(x-5,y-5,10,10)
+                }else{
+                    newDot = { x: x, y: y }
+                drawLine(oldDot.x, oldDot.y, newDot.x, newDot.y);
+                oldDot = newDot
+                }
+            }
+        }
+        canvas.ontouchend = function(aaa){
+            using = false
+        }
+}else{
+
+        //鼠标按下
         canvas.onmousedown = function (aaa) {
             using = true
             x = aaa.clientX
@@ -78,7 +228,6 @@ api{
         // 鼠标移动
 
         canvas.onmousemove = function (aaa) {
-            // var newDot = { x: undefined, y: undefined }
             if (using) {
                 x = aaa.clientX
                 y = aaa.clientY
@@ -89,17 +238,53 @@ api{
                 drawLine(oldDot.x, oldDot.y, newDot.x, newDot.y);
                 oldDot = newDot
                 }
-                
-
             }
-
         }
         // 鼠标抬起
         canvas.onmouseup = function (aaa) {
             using = false
         }
+}
+
+red.onclick = function(){
+    strokeStyle = 'red'
+    red.classList.add('active');
+    yellow.classList.remove('active')
+    blue.classList.remove('active');
+}
+yellow.onclick = function(){
+    strokeStyle = 'yellow'
+  yellow.classList.add('active');
+    red.classList.remove('active')
+    blue.classList.remove('active');
+}
+blue.onclick = function(){
+    strokeStyle = 'blue'
+    blue.classList.add('active');
+    yellow.classList.remove('active')
+    red.classList.remove('active')
+}
 
 
+thin.onclick = function(){
+    lineWidth = 3
+    thin.classList.add('active');
+    thick.classList.remove('active');
+}
+thick.onclick = function(){
+    lineWidth = 6
+    thick.classList.add('active');
+    thin.classList.remove('active');
+}
+saves.onclick = function(){
+var url = canvas.toDataURL("image/png")
+a = document.createElement('a')
+document.body.appendChild(a)
+a.href = url
+a.download = '謝謝'
+a.target = '_blank'
+a.click()
+}
 
         // 画圆 
         function circle(x, y, radius) {
@@ -109,31 +294,39 @@ api{
             context.fillStyle = 'red'
             context.fill();
         }
-
         //画线
-
         function drawLine(x1, y1, x2, y2) {
             context.beginPath();
-            context.lineWidth= 4
+            context.lineWidth=lineWidth
             context.moveTo(x1, y1);
-            context.lineWidth= 4
             context.lineTo(x2, y2);
             // context.fillStyle = "red";
             // context.fill();
         //     context.moveTo(x1,y1);
         // context.lineTo(x2,y2);
-        context.strokeStyle = "red";
+        context.strokeStyle = strokeStyle;
         context.stroke();
             context.closePath(); 
         }
 
         var eraserEnable = false
-        eraser.onclick=function(){
-            eraserEnable = !eraserEnable
+        erasers.onclick=function(){
+            eraserEnable = true
+            erasers.classList.add('active')
+            pens.classList.remove('active')
+        }
+        pens.onclick=function(){
+            eraserEnable = false
+            pens.classList.add('active')
+            erasers.classList.remove('active')
+        }
+        deletes.onclick = function(){
+            context.clearRect(0,0,canvas.width,canvas.height)
         }
 
 
     </script>
+    <script src="//at.alicdn.com/t/font_737729_jmu9gccd00n.js"></script>
 </body>
 
 </html>

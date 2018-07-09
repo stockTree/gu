@@ -4,7 +4,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>我的网页</title>
-		<link rel="stylesheet" href="a.css">
+		<link rel="stylesheet" href="main.css">
+		<link rel="stylesheet" href="loading.css">
 		<script src="//at.alicdn.com/t/font_703467_lecx1lftqa.js"></script>
 		<style type="text/css">
 			.icon {
@@ -14,11 +15,37 @@
 				fill: currentColor;
 				overflow: hidden;
 			}
+			.sitewelcome{
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #ccc;
+				z-index:1;
+				display:none;
+				justify-content: center;
+				align-items: center;
+				z-index: 10;
+
+			}
+			.sitewelcome.active{
+				display: flex;
+			}
+			
 		</style>
 	</head>
 
 	<body>
-		<div class="topNavBar clearfix">
+		<div class="sitewelcome active" id="sitewelcome">
+				<div class="loading">
+						<!-- <div class="circlegrey"></div>
+						<div class="circlegrey"></div> -->
+					</div>
+		</div>
+		
+		<div class="topNavBar clearfix" id="topNavBar">
 			<a class="logo" alt="logo">
 				<span class="rs">RS</span><span class="card">card</span>
 			</a>
@@ -33,11 +60,24 @@
 					<li>
 						<a href="#">EXPERIENCE</a>
 					</li>
-					<li>
+					<li class="menuTigger">
 						<a href="#">PRICING</a>
+						<ul class="submenu">
+							<li>作品1</li>
+							<li>作品2</li>
+							<li>作品3</li>
+						</ul>
+
+							
 					</li>
-					<li>
+					<li class="menuTigger">
 						<a href="#">BLOG</a>
+						<ul class="submenu">
+								<li>博客1</li>
+								<li>博客2</li>
+								<li>博客3</li>
+							</ul>
+	
 					</li>
 					<li>
 						<a href="#">CALENDAR</a>
@@ -187,7 +227,41 @@
 			</div>
 		</div>
 		</section>
+		<script>
+			setTimeout(function(){
+				sitewelcome.classList.remove('active')
+			},3000)
 		
+		window.onscroll = function(eee){
+			if(eee.pageY>0){
+				topNavBar.classList.add('sticky')
+			}else{
+				topNavBar.classList.remove('sticky')
+			}
+		}
+		let litags = document.getElementsByClassName('menuTigger')
+        console.log(litags)
+		for(let i = 0;i<litags.length;i++){
+		litags[i].onmouseenter = function(x){
+        // console.log(x.target)
+		let li = x.target
+		let brother = li.getElementsByTagName('ul')[0]
+		// while( brother.nodeType===3){
+		// 	brother = brother.nextSibling
+		// } 
+		brother.classList.add('active')
+		// console.log(x.currentTarget)
+		}
+		litags[i].onmouseleave = function(x){
+			let li = x.target
+			let brother = li.getElementsByTagName('ul')[0]
+		// while( brother.nodeType===3){
+		// 	brother = brother.nextSibling
+		// } 
+		brother.classList.remove('active')
+		}
+		}
+		</script>
 	</body>
 
 </html>
