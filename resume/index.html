@@ -41,7 +41,7 @@
 		<div class="sitewelcome active" id="sitewelcome">
 				<div class="loading">
 						<!-- <div class="circlegrey"></div>
-						<div class="circlegrey"></div> -->
+						<div class="parentC"><div class="circlegreyT"></div></div> -->
 					</div>
 		</div>
 		
@@ -52,16 +52,13 @@
 			<nav style="float: right;">
 				<ul class="clearfix">
 					<li>
-						<a href="#">ABOUT</a>
+						<a href="#">关于</a>
 					</li>
 					<li>
-						<a href="#">SKILLS</a>
-					</li>
-					<li>
-						<a href="#">EXPERIENCE</a>
+						<a href="#skills">技能</a>
 					</li>
 					<li class="menuTigger">
-						<a href="#">PRICING</a>
+						<a href="#pricing">作品</a>
 						<ul class="submenu">
 							<li>作品1</li>
 							<li>作品2</li>
@@ -71,7 +68,7 @@
 							
 					</li>
 					<li class="menuTigger">
-						<a href="#">BLOG</a>
+						<a href="#blog">博客</a>
 						<ul class="submenu">
 								<li>博客1</li>
 								<li>博客2</li>
@@ -80,16 +77,10 @@
 	
 					</li>
 					<li>
-						<a href="#">CALENDAR</a>
+						<a href="#content">联系方式</a>
 					</li>
 					<li>
-						<a href="#">CONTENT</a>
-					</li>
-					<li>
-						<a href="#">OTHER</a>
-					</li>
-					<li>
-						<a href="#">ALL DEMOS</a>
+						<a href="#other">其他</a>
 					</li>
 				</ul>
 			</nav>
@@ -149,7 +140,7 @@
 				</p>
 		</main>
 		<section class="skills">
-			<h2>技能</h2>
+			<h2 id="skills">技能</h2>
 			<ol class="clearfix">
 				<li>
 					<h3>html5 &amp; css</h3>
@@ -191,7 +182,7 @@
 			</ol>
 		</section>
 		<section class="portfolio">
-			<h2 style="margin-top: 30px;">作品集</h2>
+			<h2 style="margin-top: 30px;" id="pricing">作品集</h2>
 			<nav>
 				<ol class="clearfix">
 					<li id="portfolio1">所有</li>
@@ -228,6 +219,50 @@
 		</div>
 		</section>
 		<script>
+			// setTimeout(function(){
+			// 	sitewelcome.style.display = 'none';
+
+			// },5000)
+
+			// window.onscroll = function(x){
+			// if(x.pageY > 0){
+			// 	topNavBar.classList.add('bigcolor')
+			// }else{
+			// 	topNavBar.classList.remove('bigcolor')
+			// }
+			// }
+			 var liList = document.querySelectorAll('#topNavBar>nav>ul>li')
+				for(var i= 0;i<liList.length;i++){
+					liList[i].onmouseenter=function(x){
+				 c=x.target
+				c.classList.add('active')
+				b=c.getElementsByTagName('ul')[0]
+				if(b !=undefined){
+					b.classList.add('active')
+				}
+					}
+				liList[i].onmouseleave=function(x){
+				// var c=x.target
+				c.classList.remove('active')
+				 b=c.getElementsByTagName('ul')[0]
+				if(b !=undefined){
+					b.classList.remove('active')
+				}
+				}	
+			}
+			let aItems = document.querySelectorAll('#topNavBar>nav>ul>li>a')
+				for(let a=0;a<aItems.length;a++){
+					
+					aItems[a].onclick = function(b){
+						b.preventDefault()
+					let	href=b.target.getAttribute('href')
+					let elementt = document.querySelector(href)
+						let top = elementt.offsetTop
+						window.scrollTo(0,top-100)
+					}
+				}
+			
+			
 			setTimeout(function(){
 				sitewelcome.classList.remove('active')
 			},3000)
@@ -239,28 +274,28 @@
 				topNavBar.classList.remove('sticky')
 			}
 		}
-		let litags = document.getElementsByClassName('menuTigger')
-        console.log(litags)
-		for(let i = 0;i<litags.length;i++){
-		litags[i].onmouseenter = function(x){
-        // console.log(x.target)
-		let li = x.target
-		let brother = li.getElementsByTagName('ul')[0]
-		// while( brother.nodeType===3){
-		// 	brother = brother.nextSibling
-		// } 
-		brother.classList.add('active')
-		// console.log(x.currentTarget)
-		}
-		litags[i].onmouseleave = function(x){
-			let li = x.target
-			let brother = li.getElementsByTagName('ul')[0]
-		// while( brother.nodeType===3){
-		// 	brother = brother.nextSibling
-		// } 
-		brother.classList.remove('active')
-		}
-		}
+		// let litags = document.getElementsByClassName('menuTigger')
+        // console.log(litags)
+		// for(let i = 0;i<litags.length;i++){
+		// litags[i].onmouseenter = function(x){
+        // // console.log(x.target)
+		// let li = x.target
+		// let brother = li.getElementsByTagName('ul')[0]
+		// // while( brother.nodeType===3){
+		// // 	brother = brother.nextSibling
+		// // } 
+		// brother.classList.add('active')
+		// // console.log(x.currentTarget)
+		// }
+		// litags[i].onmouseleave = function(x){
+		// 	let li = x.target
+		// 	let brother = li.getElementsByTagName('ul')[0]
+		// // while( brother.nodeType===3){
+		// // 	brother = brother.nextSibling
+		// // } 
+		// brother.classList.remove('active')
+		// }
+		// }
 		</script>
 	</body>
 
