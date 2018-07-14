@@ -224,13 +224,6 @@
 				sitewelcome.classList.remove('active')
 			},3000)
 		
-		window.onscroll = function(eee){
-			if(eee.pageY>0){
-				topNavBar.classList.add('sticky')
-			}else{
-				topNavBar.classList.remove('sticky')
-			}
-		}
 			// setTimeout(function(){
 			// 	sitewelcome.style.display = 'none';
 
@@ -263,6 +256,7 @@
 				}	
 			}
 			let aItems = document.querySelectorAll('#topNavBar>nav>ul>li>a')
+	
 				for(let a=0;a<aItems.length;a++){
 					
 					aItems[a].onclick = function(b){
@@ -270,27 +264,51 @@
 					let	href=b.target.getAttribute('href')
 					let elementt = document.querySelector(href)
 						let top = elementt.offsetTop
-
-						let n = 25  //次数
 						let nowHeight = window.scrollY
 						let distance = top-100
 						let leng = distance - nowHeight
-						let moves =leng/25
-						let i =0;
-						let id = setInterval(function(){
-							if( i === n){
-								window.clearInterval(id)
-								return
-							}
-							i = i +1
-							window.scrollTo(0 ,nowHeight + moves*i )
-						},20)
-
+						// let moves =leng/25
+						// let i =0;
+						// let id = setInterval(function(){
+						// 	if( i === n){
+						// 		window.clearInterval(id)
+						// 		return
+						// 	}
+						// 	i = i +1
+						// 	window.scrollTo(0 ,nowHeight + moves*i )
+						// },20)
+						let t= Math.abs(leng/2)
+						if(t>500){
+							t = 500
+						}
+						function animate(time) {
+							requestAnimationFrame(animate);
+							TWEEN.update(time);
+						}
+						requestAnimationFrame(animate);
+						var coords = {  y: nowHeight }; 
+						var tween = new TWEEN.Tween(coords) 
+						.to({ y:distance},t) 
+						.easing(TWEEN.Easing.Quadratic.Out) 
+						.onUpdate(function() { 
+							// console.log(coords.y)
+							window.scrollTo(0 ,coords.y)
+							// box.style.setProperty('transform', 'translate(' + coords.x + 'px, ' + coords.y + 'px)');
+						})
+						.start(); 
 						// window.scrollTo(0,top-100)
 					}
 				}
 			
 			
+		window.onscroll = function(eee){
+			if(eee.pageY>0){
+				console.log(eee.pageY)
+				topNavBar.classList.add('sticky')
+			}else{
+				topNavBar.classList.remove('sticky')
+			}
+		}
 
 			
 		
@@ -317,6 +335,7 @@
 		// }
 		// }
 		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
 	</body>
 
 </html>
