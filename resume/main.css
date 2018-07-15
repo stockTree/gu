@@ -10,6 +10,9 @@ h1,h2,p,dd,ul,ol,h3,h4,h5{
 ul,ol{
 	list-style: none;
 }
+.red{
+	border: red solid 10px;
+}
 hr{
 	height: 0;
 	border: none;
@@ -47,6 +50,14 @@ a{
 	font-weight: bold;
 	position: relative;
 }
+[data-x]{
+	transform: translateY(150px)
+}
+.transforms{
+	transform: translateY(0px);
+	transition:all 2s;
+}
+
 .topNavBar > nav > ul > li > a{
 	font-size: 12px;
 	color: inherit;
@@ -58,7 +69,9 @@ a{
 	display: block;
 	position: relative;
 }
-.topNavBar > nav > ul > li:hover::after{
+.topNavBar > nav > ul > li.active>a::after,
+.topNavBar > nav > ul > li.highLight>a::after
+{
 	content:'';
 	display: block;
 	position: absolute;
@@ -274,6 +287,7 @@ section.skills > ol > li{
 	color: #000;
 	/*padding-right: 40px ;*/
 	box-sizing: border-box;
+	overflow: hidden;
 	/*border: 1px solid red;*/
 }
 section.skills > ol > li:nth-child(even){
@@ -286,11 +300,18 @@ section.skills .progressBar{
 	/*border: #CF5D5F 1px solid;*/
 }
 section.skills .progress{
+transform: translateX(-100%);
+transition: all 2s;
+}
+section.skills.transforms .progress{
 	background: #e6686a;
-	width: 70%;
+	width: 40%;
 	height: 100%;
 	border-radius: 2px;
+	transform: translateX(0%);	
+	
 }
+
 section.portfolio{
 	text-align: center;
 	margin-bottom: 100px;
