@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li id="item1">选项1</li>
+        <li id="item2">选项2</li>
+        <li id="item3">选项3</li>
+        <li id="item4">选项4</li>
+        <li id="item5">选项5</li>
+    </ul>        
+
+
+    <script>
+    
+
+    
+// console.log(getSiblings(item3))
+
+// function addClass(node,classes){
+ 
+// }
+// addClass(item3,{'a':true,'b':false,'c':true})
+// window.ll = {}
+// ll.getSiblings = getSiblings
+// ll.addClass = addClass
+// ll.getSiblings(item3)
+// ll.addClass(item3,{'a':true,'b':false,'c':true})
+
+Node.prototype.getSiblings=function(){
+    // function getSiblings(node){
+        var allchildren = this.parentNode.children
+        var array = {length:0}
+    for(var i=0;i<allchildren.length;i++){
+        if(allchildren[i]!==this){
+            array[array.length]=allchildren[i]
+            array.length+=1
+        }
+    }
+return array  
+}
+console.log(item3.getSiblings.call(item3))
+
+Node.prototype.addClass=function(classes){
+    for(let key in classes){
+     value = classes[key] 
+     var methodName = value?'add':'remove'
+        this.classList[methodName](key)
+ }
+}
+console.log(item3.addClass.call(item3,{'a':true,'b':false,'c':true}))
+
+
+
+
+    </script>
+</body>
+</html>
