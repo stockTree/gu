@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+    .red{
+        color: red;
+    }
+    </style>
 </head>
 <body>
     <ul>
@@ -32,31 +37,131 @@
 // ll.getSiblings(item3)
 // ll.addClass(item3,{'a':true,'b':false,'c':true})
 
-Node.prototype.getSiblings=function(){
-    // function getSiblings(node){
-        var allchildren = this.parentNode.children
-        var array = {length:0}
-    for(var i=0;i<allchildren.length;i++){
-        if(allchildren[i]!==this){
-            array[array.length]=allchildren[i]
-            array.length+=1
+// Node.prototype.getSiblings=function(){
+//     // function getSiblings(node){
+//         var allchildren = this.parentNode.children
+//         var array = {length:0}
+//     for(var i=0;i<allchildren.length;i++){
+//         if(allchildren[i]!==this){
+//             array[array.length]=allchildren[i]
+//             array.length+=1
+//         }
+//     }
+// return array  
+// }
+// console.log(item3.getSiblings.call(item3))
+
+// Node.prototype.addClass=function(classes){
+//     for(let key in classes){
+//      value = classes[key] 
+//      var methodName = value?'add':'remove'
+//         this.classList[methodName](key)
+//  }
+// }
+// console.log(item3.addClass.call(item3,{'a':true,'b':false,'c':true}))
+
+
+
+
+//单个元素或者id或者class
+// window.jQuery = function(nodeOrseletor){
+//     let node
+//     if(typeof nodeOrseletor==='string'){
+//         node = document.querySelector(nodeOrseletor)
+//     }else{
+//         node = nodeOrseletor
+//     }
+//     return{
+//         getSiblings:function(){
+//             console.log(node)
+//             console.log(node.parentNode)
+//             var allchildren = node.parentNode.children
+//         var array = {length:0}
+//     for(var i=0;i<allchildren.length;i++){
+//         if(allchildren[i]!==node){
+//             array[array.length]=allchildren[i]
+//             array.length+=1
+//         }
+//     }
+// return array  
+//         },
+//         addClass:function(classes){
+//             for(let key in classes){
+//      value = classes[key] 
+//      var methodName = value?'add':'remove'
+//         node.classList[methodName](key)
+//  }
+
+//         }
+//     }
+// }
+
+
+window.jQuery = function(nodeOrseletor){
+    let nodes = {}
+    if(typeof nodeOrseletor === 'string'){
+        let temp= document.querySelectorAll(nodeOrseletor)
+        for(var i = 0;i<temp.length;i++){
+            nodes[i] = temp[i]
         }
+        nodes.length = temp.length
+    }else if(nodeOrseletor instanceof Node){
+        nodes = {0:nodeOrseletor,length:1}
     }
-return array  
-}
-console.log(item3.getSiblings.call(item3))
+    nodes.getSibling = function()
+{
+}  
+nodes.addClass = function(classes){
 
-Node.prototype.addClass=function(classes){
-    for(let key in classes){
-     value = classes[key] 
-     var methodName = value?'add':'remove'
-        this.classList[methodName](key)
+             for(let key in classes){
+      value = classes[key] 
+      var methodName = value?'add':'remove'
+      for(let i=0;i<nodes.length;i++){
+        nodes[i].classList[methodName](key)
+      }
+        //  nodes[0].classList[methodName](key)
+        //  nodes[1].classList[methodName](key)
+        //  nodes[2].classList[methodName](key)
+        //  nodes[3].classList[methodName](key)
+        //  nodes[4].classList[methodName](key)
  }
+
 }
-console.log(item3.addClass.call(item3,{'a':true,'b':false,'c':true}))
+nodes.text = function(text){
+    if(text===undefined){
+        // nodes.getText = function(){
+    let texts=[]
+    for(let i=0;i<nodes.length;i++){
+       texts.push(nodes[i].textContent)
+      }
+      return texts
+// }
+    }else{
+// nodes.setText = function(text){
+    // let texts=[]
+    for(let i=0;i<nodes.length;i++){
+       nodes[i].textContent=text
+      }
+      
+// }
+    }
+}
 
 
 
+
+  return nodes
+}
+
+
+var node2 = jQuery('ul>li')
+// node2.addClass({'red':true})
+// node2.setText('hi')
+var text = node2.text(1)
+console.log(text)
+// node2.getSiblings()
+// // console.log(node2.getSiblings())
+// node2.addClass({'red':true,'b':false,'c':true})
 
     </script>
 </body>
