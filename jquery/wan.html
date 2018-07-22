@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .red{
+       color: red
+    }
+    </style>
+</head>
+<body>
+    
+    <div id="cc" class="cc">8</div>
+    <div>6</div>
+    <div>3</div>
+    <div>21</div>
+    <div>9</div>
+    <div>2</div>
+
+<script>
+
+    window.jQuery =function(div){
+        // var node ={}
+        var alldiv = document.querySelectorAll(div);
+        alldiv.addClass=function(color){
+        for(var i=0;i< alldiv.length;i++){
+            alldiv[i].classList.add(color)
+            console.log('alldiv')
+        }
+        }
+        alldiv.setText=function (text){
+        for(var j = 0;j< alldiv.length;j++){
+            alldiv[j].textContent = text
+        }
+        }
+        return alldiv
+    }
+
+window.$ = jQuery
+$div = $('div')
+$div.addClass('red')
+$div.setText('hah')
+</script>
+</body>
+</html>

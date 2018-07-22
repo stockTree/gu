@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .images{
+        display: flex;
+        align-items: flex-start; 
+        /* border:1px solid red; */
+        transition: all .5s;
+    }
+    .images img{
+        width: 300px;
+        min-width:300px;
+      
+    }
+    .window{
+        /* border:8px solid green; */
+        width:300px;
+        height: 194px;
+        overflow: hidden;
+    }
+    .red{
+        color:red
+    }
+    </style>
+    
+</head>
+<body>
+    <div class="window">
+    <div class="images" >
+    <img src="./img/0.jpg" width="300" alt="狗狗图片" height="194">
+    <img src="./img/cat0.jpg" width="300" alt="狗狗图片" height="194">
+    <img src="./img/cat1.jpg" width="300" alt="狗狗图片" height="194">
+    <img src="./img/cat4.jpg" width="300" alt="狗狗图片" height="194">
+</div>
+</div>
+<span id="buttons">
+<button>第一张</button>
+<button>第二张</button>
+<button>第三张</button>
+<button>第四张</button>
+</span>
+
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+<script>
+    var allButtons = $('#buttons > button')
+    for(let i = 0;i < allButtons.length;i++){
+        $(allButtons[i]).on('click',function(x){
+            //获取index
+           var index=$(x.target).index()
+           console.log(index)
+           var p = index*-300
+           $('.images').css({
+            transform:'translateX('+p+'px)'
+         })
+         n = index
+         allButtons.eq(n%size).addClass('red')
+.siblings('.red').removeClass('red')
+        })
+    }
+
+var n=0;
+//trigger 触发事件
+// allButtons.eq(n%3).trigger('click')
+var size = allButtons.length
+allButtons.eq(n%size).trigger('click').addClass('red')
+.siblings('.red').removeClass('red')
+var times=setInterval(()=>{
+    n=n+1
+    allButtons.eq(n%size).trigger('click').addClass('red')
+    .siblings('.red').removeClass('red')
+},2000)
+
+$('.window').on('mouseenter',function(){
+    window.clearInterval(times)
+})
+$('.window').on('mouseleave',function(){
+    var times=setInterval(()=>{
+    n=n+1
+    allButtons.eq(n%size).trigger('click').addClass('red')
+    .siblings('.red').removeClass('red')
+},2000)
+})
+
+    // $(p1).on('click',function(){
+    //     $('.images').css({
+    //         transform:'translateX(0)'
+    //     })
+    // })
+    // $(p2).on('click',function(){
+    //     $('.images').css({
+    //         transform:'translateX(-300px)'
+    //     })
+    // })
+    // $(p3).on('click',function(){
+    //     $('.images').css({
+    //         transform:'translateX(-600px)'
+    //     })
+    // })
+    // $(p4).on('click',function(){
+    //     $('.images').css({
+    //         transform:'translateX(-900px)'
+    //     })
+    // })
+</script>
+
+</body>
+</html>
