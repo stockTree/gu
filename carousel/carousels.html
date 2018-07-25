@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+    .windowss{
+        width: 300px;
+        height: 194px;
+        overflow: hidden;
+    }
+    .images{
+        min-width:300px;
+        /* width: 300px; */
+        height: 194px;
+        display: flex;
+        flex-wrap: nowrap;
+        transition: all .5s;
+    }
+    .images img{
+        min-width:300px;
+    }
+    .red{
+        color: red;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="windowss" class="windowss">
+        <div id="images" class="images">
+            <img src="./img/0.jpg" width=300 height=194>
+            <img src="./img/cat0.jpg" width=300 height=194>
+            <img src="./img/cat1.jpg" width=300 height=194>
+            <img src="./img/cat4.jpg" width=300 height=194>
+        </div>
+</div>
+<div id="buttonSlide">
+    <span class="oneButton">第一张</span>
+    <span class="oneButton">第二张</span>
+    <span class="oneButton">第三张</span>
+    <span class="oneButton">第四张</span>
+</div>
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+
+
+var buttonSlides = $('#buttonSlide > span')
+for(let i = 0;i <buttonSlides.length;i++){
+    console.log(1)
+    $(buttonSlides[i]).on('click',function(x){
+        var index = $(x.target).index()
+        var p = index*-300
+        $(images).css(
+            'transform','translateX('+p+'px)'
+        )
+        n = index;
+        buttonSlides.eq(n%size).addClass('red').siblings('.red').removeClass('red')
+    })
+}
+var n=0
+var size = buttonSlides.length
+console.log(size)
+var times = setInterval(()=>{
+n = n+1
+buttonSlides.eq(n%size).trigger('click').addClass('red').siblings('.red').removeClass('red')
+
+},2000)
+
+$('#windowss').on('mouseenter',function(){
+    window.clearInterval(times)
+})
+$('#windowss').on('mouseleave',function(){
+    var times = setInterval(()=>{
+n = n+1
+buttonSlides.eq(n%size).trigger('click').addClass('red').siblings('.red').removeClass('red')
+
+},2000)
+})
+
+
+
+</script>
+
+</body>
+</html>
