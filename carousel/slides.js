@@ -3,7 +3,7 @@ let n = 1
 setInterval(()=>{
     makeleave($(`.images >img:nth-child(${x(n)})`))
     .one('transitionend',(e)=>{
-        makeCurrent($(e.target))
+        makeenter($(e.target))
     })
     makeCurrent($(`.images > img:nth-child(${x(n+1)})`))
 n+=1
@@ -15,6 +15,7 @@ function x(n){
             n=4
         }
     }
+    
     return n
 }
 function chushihua(){

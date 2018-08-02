@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>我的页面</title>
+    <style>
+
+    </style>
+</head>
+<body>
+   
+
+       
+
+    <div class="wrapper" id="wrapper">
+        <button id="clickMe">点我</button>
+        <div id="popover" class="popover">
+            <input type="checkbox">浮层
+        </div>
+    </div>
+    <div class="rectangle"></div>
+    <svg version="1.1"
+     baseProfile="full"
+     width="300" height="200"
+     xmlns="http://www.w3.org/2000/svg">
+
+ 
+
+  <circle cx="150" cy="100" r="80" fill="green" />
+
+</svg>
+
+
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+    $(clickMe).on('click',function(){
+        $(popover).show()
+        setTimeout(function(){
+            $(document).one('click',function(){
+        $(popover).hide()
+    })
+        },0)
+        
+    })
+    
+    // $(wrapper).on('click',function(e){
+    //    e.stopPropagation()
+    // })
+    // $(document).on('click',function(){
+    //     $(popover).hide()
+    // })
+    </script>
+
+</body>
+</html>

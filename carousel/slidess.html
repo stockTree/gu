@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .window{
+        width: 300px;
+        height:194px;
+        overflow: hidden;
+    }
+    .images{
+        position: relative;
+        transition: all .3s;
+    }
+    .images >img{
+        width: 300px;
+        height:194px; 
+        position: absolute;
+        top: 0;
+    }
+    .current{
+        left: 0;
+transform: translateX(0);
+z-index: 1;
+    }
+    .enter{
+       
+transform: translateX(100%)
+    }
+    .leave{
+        transform: translateX(-100%);
+        z-index: 1;
+    }
+    </style>
+</head>
+<body>
+    <div class="window">
+        <div class="images">
+            <img src="./img/0.jpg" alt="图片" width=300 height=194>
+            <img src="./img/cat0.jpg" alt="图片" width=300 height=194>
+            <img src="./img/cat1.jpg" alt="图片" width=300 height=194>
+            <img src="./img/cat4.jpg" alt="图片" width=300 height=194>
+        </div>
+    </div>
+
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+    
+     $('img:nth-child(1)').addClass('current')
+     $('img:nth-child(1)').addClass('enter')
+     $('img:nth-child(1)').addClass('enter')
+     $('img:nth-child(4)').addClass('enter')
+let n=1
+setInterval(()=>{
+$(`.images > img:nth-child(${x(n)})`).removeClass('current').addClass('leave')
+.one('transitionend',(e)=>{
+    $(e.target).addClass('enter').removeClass('leave')
+})
+$(`.images > img:nth-child(${x(n+1)})`).removeClass('enter').addClass('current').removeClass('leave')
+    n=n+1
+},3000)
+
+
+function x(n){
+    if(n>4){
+        n=n%4
+        if(n===0){
+            n=4
+        }
+    }
+    console.log(n)
+    return n
+}
+    </script>
+</body>
+</html>
