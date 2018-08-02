@@ -9,11 +9,11 @@
 }
 .images{
    display: flex;
-  
+   transition: all 1s;
 }
  .images > img{
     width: 100%;
-    transition: all 1s;
+    
     /* transition: all 3s; */
     /* position: absolute;
     top: 0 */
