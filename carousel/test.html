@@ -7,7 +7,9 @@
 
     <title>我的页面</title>
     <style>
-
+.popover{
+    display: none;
+}
     </style>
 </head>
 <body>
@@ -18,10 +20,11 @@
     <div class="wrapper" id="wrapper">
         <button id="clickMe">点我</button>
         <div id="popover" class="popover">
-            <input type="checkbox">浮层
+            <!-- <input type="checkbox"> -->
+            浮层
         </div>
     </div>
-    <div class="rectangle"></div>
+    <!-- <div class="rectangle"></div>
     <svg version="1.1"
      baseProfile="full"
      width="300" height="200"
@@ -29,7 +32,7 @@
 
  
 
-  <circle cx="150" cy="100" r="80" fill="green" />
+  <circle cx="150" cy="100" r="80" fill="green" /> -->
 
 </svg>
 
@@ -37,16 +40,31 @@
 
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
-    $(clickMe).on('click',function(){
-        $(popover).show()
-        setTimeout(function(){
-            $(document).one('click',function(){
-        $(popover).hide()
+
+ $(wrapper).on('click',function(e){
+       e.stopPropagation()
+       $('#clickMe').on('click',function(){
+            $('#popover').show();
+        })
     })
-        },0)
+
+       
+        $(document).on('click',function(){
+          
+            $('#popover').hide();
+        })
+
+    //      $(popover).hide()
+    // $(clickMe).on('click',function(){
+    //     $(popover).show()
+    //     setTimeout(function(){
+    //         $(document).one('click',function(){
+    //     $(popover).hide()
+    // })
+    //     },0)
         
-    })
-    
+    // })
+    //     $(popover).hide()
     // $(wrapper).on('click',function(e){
     //    e.stopPropagation()
     // })

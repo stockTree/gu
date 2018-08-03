@@ -14,7 +14,7 @@ function bingEvents(){
        let index = $button.index()
       if(current===$buttons.length-1 && index === 0){
         $slides.css({transform:`translateX(${-($buttons.length + 1)*300}px)`})
-        .one('trsnsitionend',function(){
+        .one('transitionend',function(){
             console.log(2)
             $slides.hide().offset()
             console.log(3)
@@ -24,7 +24,7 @@ function bingEvents(){
       }else if(current=== 0 && index ===$buttons.length - 1){
       
         $slides.css({transform:'translateX(0px)'})
-        .one('trsnsitionend',function(){
+        .one('transitionend',function(){
             $slides.hide().offset()
             $slides.css({transform:`translateX(${-(index+1)*300}px)`}).show()
         })
