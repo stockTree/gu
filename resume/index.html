@@ -1,355 +1,180 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8" />
-		<title>我的网页</title>
-		<link rel="stylesheet" href="main.css">
-		<link rel="stylesheet" href="loading.css">
-		<script src="//at.alicdn.com/t/font_703467_lecx1lftqa.js"></script>
-		<style type="text/css">
-			.icon {
-				width: 1em;
-				height: 1em;
-				vertical-align: -0.15em;
-				fill: currentColor;
-				overflow: hidden;
-			}
-			.sitewelcome{
-				display: none;
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background-color: #ccc;
-				z-index:1;
-				display:none;
-				justify-content: center;
-				align-items: center;
-				z-index: 10;
+<head>
+	<meta charset="utf-8" />
+	<title>我的网页</title>
 
-			}
-			.sitewelcome.active{
-				display: flex;
-			}
-			
-		</style>
-	</head>
+	<link rel="stylesheet" href="loading.css">
+	<script src="//at.alicdn.com/t/font_703467_lecx1lftqa.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.0/css/swiper.min.css">
+	<link rel="stylesheet" href="main.css">
+</head>
 
-	<body>
-		<!-- <div class="sitewelcome active" id="sitewelcome">
-				<div class="loading">
-						
-					</div>
-		</div> -->
-		
-		<div class="topNavBar clearfix" id="topNavBar">
-			<a class="logo" alt="logo">
-				<span class="rs">RS</span><span class="card">card</span>
-			</a>
-			<nav style="float: right;">
-				<ul class="clearfix">
-					<li>
-						<a href="#userCard">关于</a>
-					</li>
-					<li>
-						<a href="#skills">技能</a>
-					</li>
-					<li class="menuTigger">
-						<a href="#pricing">作品</a>
-						<ul class="submenu">
-							<li>作品1</li>
-							<li>作品2</li>
-							<li>作品3</li>
-						</ul>
+<body>
+	<div class="topNavBar clearfix" id="topNavBar">
+		<a class="logo" alt="logo">
+			<span class="rs">RS</span>
+			<span class="card">card</span>
+		</a>
+		<nav style="float: right;">
+			<ul class="clearfix">
+				<li>
+					<a href="#userCard">关于</a>
+				</li>
+				<li>
+					<a href="#skills">技能</a>
+				</li>
+				<li class="menuTigger">
+					<a href="#pricing">作品</a>
+					<ul class="submenu">
+						<li>作品1</li>
+						<li>作品2</li>
+						<li>作品3</li>
+					</ul>
 
-							
-					</li>
-					<li class="menuTigger">
-						<a href="#blog">博客</a>
-						<ul class="submenu">
-								<li>博客1</li>
-								<li>博客2</li>
-								<li>博客3</li>
-							</ul>
-	
-					</li>
-					<li>
-						<a href="#content">联系方式</a>
-					</li>
-					<li>
-						<a href="#other">其他</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-		<div class="banner" style="background-image:url(./img/earth.png);">
-			<div class="mask"></div>
-		</div>
-		<main>
-			<div class="userCard" id="userCard" data-x>
-				<div class="pictureAndText clearfix">
-					<div class="picture">
-						<div><img src="img/head.png" width="299px" height="347px" alt="头像" /></div>
-					</div>
-					<div class="text">
-						<div class="profile">
-							<span class="welcome">hello
-					<span class="triangle"></span>
-							</span>
-							<h1>林xx</h1>
-							<p>前端开发工程师</p>
-							<hr>
-							<dl>
-								<dt>年龄</dt>
-								<dd>23</dd>
-								<dt>所在城市</dt>
-								<dd>福州</dd>
-								<dt>邮箱</dt>
-								<dd>3203418319@qq.com</dd>
-							</dl>
-						</div>
-					</div>
-						</div>
-					<footer class="media">
-						<a href="#">
-							<svg class="icon" aria-hidden="true">
-								<use xlink:href="#icon-github"></use>
-							</svg>
-						</a>
-						<a href="#">
-							<svg class="icon" aria-hidden="true">
-								<use xlink:href="#icon-weibo"></use>
-							</svg>
-						</a>
-						<a href="#">
-							<svg class="icon" aria-hidden="true">
-								<use xlink:href="#icon-tuite"></use>
-							</svg>
-						</a>
-						
-					</footer>
-			
-			</div>
-<p class="download-wrapper">
-				<a class="downloadbtn" href="#" target="_blank" download>下载pdf简历</a>
-			</p>	
-				<p class="introdaction"> 叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见 叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见 叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见 叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见
-				</p>
-		</main>
-		<section class="skills" id="skills" data-x>
-			<h2 >技能</h2>
-			<ol class="clearfix">
-				<li>
-					<h3>html5 &amp; css</h3>
-					<div class="progressBar">
-						<div class="progress"></div>
-					</div>
+
+				</li>
+				<li class="menuTigger">
+					<a href="#blog">博客</a>
+					<ul class="submenu">
+						<li>博客1</li>
+						<li>博客2</li>
+						<li>博客3</li>
+					</ul>
+
 				</li>
 				<li>
-					<h3>react.js</h3>
-					<div class="progressBar">
-						<div class="progress" style="width:30%;"></div>
-					</div>
+					<a href="#content">联系方式</a>
 				</li>
 				<li>
-					<h3>javascript</h3>
-					<div class="progressBar">
-						<div class="progress" style="width:50%;"></div>
-					</div>
+					<a href="#other">其他</a>
 				</li>
-				<li>
-					<h3>vue.js</h3>
-					<div class="progressBar">
-						<div class="progress" style="width:75%;"></div>
+			</ul>
+		</nav>
+	</div>
+	<div class="banner" style="background-image:url(./img/earth.png);">
+		<div class="mask"></div>
+	</div>
+	<main>
+		<div class="userCard" id="userCard" data-x>
+			<div class="pictureAndText clearfix">
+				<div class="picture">
+					<div>
+						<img src="img/head.png" width="299px" height="347px" alt="头像" />
 					</div>
-				</li>
-				<li>
-					<h3>jq</h3>
-					<div class="progressBar">
-						<div class="progress" style="width:60%;"></div>
-					</div>
-				</li>
-				<li>
-					<h3>node.js</h3>
-					<div class="progressBar">
-						<div class="progress" style="width:45%;"></div>
-					</div>
-				</li>
-			
-			</ol>
-		</section>
-		<section class="portfolio" id="pricing" data-x>
-			<h2 style="margin-top: 30px;">作品集</h2>
-			<nav>
-				<ol class="clearfix">
-					<li id="portfolio1">所有</li>
-					<li id="portfolio2">框架</li>
-					<li id="portfolio3">原生就是&amp; css</li>
-				</ol>
-				<div class="bar status1" id="portfolioBar">
-					<div class="bar-innr"></div>
 				</div>
-			</nav>
-			<script>
-			portfolio1.onclick=function(){
-				portfolioBar.className = 'bar status-1'
-			}
-			portfolio2.onclick=function(){
-				portfolioBar.className = 'bar status-2'
-			}
-			portfolio3.onclick=function(){
-				portfolioBar.className = 'bar status-3'
-			}
-		</script>
-		<div class="works">
-			<div class="jobs">
-				<div class="big">
-					<img src="img/big.png" alt="作品1" width="606px">
-				</div>
-				<div class="small" style="left: 645px;">
-					<img src="img/small1.png" alt="作品2" width="293px" >
-				</div>
-				<div class="small" style="left: 645px;top: 313px;">
-					<img src="img/small2.png" alt="作品3" width="293px">
+				<div class="text">
+					<div class="profile">
+						<span class="welcome">hello
+							<span class="triangle"></span>
+						</span>
+						<h1>林xx</h1>
+						<p>前端开发工程师</p>
+						<hr>
+						<dl>
+							<dt>年龄</dt>
+							<dd>23</dd>
+							<dt>所在城市</dt>
+							<dd>福州</dd>
+							<dt>邮箱</dt>
+							<dd>3203418319@qq.com</dd>
+						</dl>
+					</div>
 				</div>
 			</div>
+			<footer class="media">
+				<a href="#">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-github"></use>
+					</svg>
+				</a>
+				<a href="#">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-weibo"></use>
+					</svg>
+				</a>
+				<a href="#">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#icon-tuite"></use>
+					</svg>
+				</a>
+
+			</footer>
+
 		</div>
-		</section>
-		<script>
+		<p class="download-wrapper">
+			<a class="downloadbtn" href="#" target="_blank" download>下载pdf简历</a>
+		</p>
+		<p class="introdaction"> 叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见 叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见 叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见叫我 啥 听不见 叫我 啥 听不见叫我 啥
+			听不见叫我 啥 听不见
+		</p>
+	</main>
+	<section class="skills" id="skills" data-x>
+		<h2>技能</h2>
+		<ol class="clearfix">
+			<li>
+				<h3>html5 &amp; css</h3>
+				<div class="progressBar">
+					<div class="progress"></div>
+				</div>
+			</li>
+			<li>
+				<h3>react.js</h3>
+				<div class="progressBar">
+					<div class="progress" style="width:30%;"></div>
+				</div>
+			</li>
+			<li>
+				<h3>javascript</h3>
+				<div class="progressBar">
+					<div class="progress" style="width:50%;"></div>
+				</div>
+			</li>
+			<li>
+				<h3>vue.js</h3>
+				<div class="progressBar">
+					<div class="progress" style="width:75%;"></div>
+				</div>
+			</li>
+			<li>
+				<h3>jq</h3>
+				<div class="progressBar">
+					<div class="progress" style="width:60%;"></div>
+				</div>
+			</li>
+			<li>
+				<h3>node.js</h3>
+				<div class="progressBar">
+					<div class="progress" style="width:45%;"></div>
+				</div>
+			</li>
 
-				setTimeout(function(){
-				sitewelcome.classList.remove('active')
-			},3000)
-		
-			 var liList = document.querySelectorAll('#topNavBar>nav>ul>li')
-				for(var i= 0;i<liList.length;i++){
-					liList[i].onmouseenter=function(x){
-				 c=x.target
-				c.classList.add('active')
-				b=c.getElementsByTagName('ul')[0]
-				if(b !=undefined){
-					b.classList.add('active')
-				}
-					}
-				liList[i].onmouseleave=function(x){
-				// var c=x.target
-				c.classList.remove('active')
-				 b=c.getElementsByTagName('ul')[0]
-				if(b !=undefined){
-					b.classList.remove('active')
-				}
-				}	
-			}
-
-
-
-			window.onscroll = function(eee){
-			if(window.scrollY>0){
-				topNavBar.classList.add('sticky')
-			}else{
-				topNavBar.classList.remove('sticky')
-			}
-				let minIndex = 0
-
-				let datas = document.querySelectorAll('[data-x]')
-				for(var i=1;i<datas.length;i++){
-					if(Math.abs(datas[i].offsetTop-window.scrollY) < Math.abs(datas[minIndex].offsetTop-window.scrollY)){
-						minIndex = i
-					}
-
-					datas[minIndex].classList.add('transforms')
-
-					let id = datas[minIndex].id
-
-					skills.classList.add('width')
-					datas[minIndex].classList.remove('width')
-
-					let a = document.querySelector('a[href="#'+id+'"]')
-					let li = a.parentNode
-					let brother = li.parentNode.children
-					li.classList.add('delay')
-				for(var j=0;j<brother.length;j++){
-					brother[j].classList.remove('highLight')		
-				}
-				li.classList.add('highLight')
-				}
-
-
-
-
-
-
-		}
-
-			let aItems = document.querySelectorAll('#topNavBar>nav>ul>li>a')
-	
-				for(let a=0;a<aItems.length;a++){
-					
-					aItems[a].onclick = function(b){
-						b.preventDefault()
-					let	href=b.target.getAttribute('href')
-					let elementt = document.querySelector(href)
-						let top = elementt.offsetTop
-						let nowHeight = window.scrollY
-						let distance = top-100
-						let leng = distance - nowHeight
-						let t= Math.abs(leng/2)
-						if(t>500){
-							t = 500
-						}
-						function animate(time) {
-							requestAnimationFrame(animate);
-							TWEEN.update(time);
-						}
-						requestAnimationFrame(animate);
-						var coords = {  y: nowHeight }; 
-						var tween = new TWEEN.Tween(coords) 
-						.to({ y:distance},t) 
-						.easing(TWEEN.Easing.Quadratic.Out) 
-						.onUpdate(function() { 
-							// console.log(coords.y)
-							window.scrollTo(0 ,coords.y)
-							// box.style.setProperty('transform', 'translate(' + coords.x + 'px, ' + coords.y + 'px)');
-						})
-						.start(); 
-						// window.scrollTo(0,top-100)
-					}
-				}
-
-
-				
-			
-			
-		
-
-			
-		
-		// let litags = document.getElementsByClassName('menuTigger')
-        // console.log(litags)
-		// for(let i = 0;i<litags.length;i++){
-		// litags[i].onmouseenter = function(x){
-        // // console.log(x.target)
-		// let li = x.target
-		// let brother = li.getElementsByTagName('ul')[0]
-		// // while( brother.nodeType===3){
-		// // 	brother = brother.nextSibling
-		// // } 
-		// brother.classList.add('active')
-		// // console.log(x.currentTarget)
-		// }
-		// litags[i].onmouseleave = function(x){
-		// 	let li = x.target
-		// 	let brother = li.getElementsByTagName('ul')[0]
-		// // while( brother.nodeType===3){
-		// // 	brother = brother.nextSibling
-		// // } 
-		// brother.classList.remove('active')
-		// }
-		// }
+		</ol>
+	</section>
+	<section class="portfolio" id="pricing" data-x>
+		<h2 style="margin-top: 30px;">作品集</h2>
 		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
-	</body>
+
+		<!-- 轮播 -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<img class="swiper-slide" src="./img/big.png">
+				<img class="swiper-slide" src="./img/small1.png">
+				<img class="swiper-slide" src="./img/small2.png">
+			</div>
+			<!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>
+		</div>
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div>
+	</section>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.0/js/swiper.min.js"></script>
+	<script src="swiper.js"></script>
+	<script src="autoSlide.js"></script>
+	<script src="stickyTopbar.js"></script>
+	<script src="smoothly-nav.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
+</body>
 
 </html>
